@@ -1,0 +1,25 @@
+Social Engineering Attack 
+
+@kali linux terminal
+
+- sudo
+
+- setoolkit
+
+- 1 
+
+- 2
+
+- 3
+
+- 1 
+
+- ip add 
+
+- 2 
+
+- Access gmail to real world pc 
+
+- enter your gmail create email and include link 
+
+- send to your target let target open
