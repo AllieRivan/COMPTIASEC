@@ -1,0 +1,432 @@
+TIER 1 HANDLING 
+
+SCENARIO 1: 
+ACCOUNT TO BE USED: (USER 1) 
+
+Phishing Email Reported by Employee
+Ticket Title: Suspicious Phishing Email Reported
+
+BODY: <NAME OF CUSTOMER> reported receiving a suspicious email claiming to be 
+from the company's HR department hr-update@company-hr.com. 
+The email asked her to click on a link to update her personal 
+information. She did not click the link but reported the email to the 
+cybersecurity team. 
+
+Note: the legitimate email of hr is hr.update@company.hr.com.
+
+
+
+SOLUTION/MITIGATION 
+
+Initial Assessment:
+
+The email had a suspicious sender address (hr-update@company-hr.com), which does not match the company's official domain.
+
+The email contained a sense of urgency and a link to an external website.
+
+
+Immediate Actions Taken:
+
+Collected the email headers and body for analysis.
+
+Confirmed the link in the email led to a known phishing domain.
+
+Blocked the phishing URL at the firewall and email gateway.
+
+Searched the email system for similar emails sent to other employees.
+
+Mitigation Steps:
+
+
+Containment:
+
+Blocked the sender's email address and domain.
+
+Quarantined the phishing email from Jane Smith’s inbox and other affected accounts.
+
+Eradication:
+
+Removed any traces of the phishing email from the email system.
+
+Updated the email filtering rules to block similar phishing attempts.
+
+Prevention:
+
+Sent a company-wide alert about the phishing attempt.
+
+Recommended enabling MFA for all employees to reduce the risk of credential theft.
+
+
+Follow-Up Actions:
+
+Monitored the email system for further phishing attempts.
+
+Documented the incident and added the phishing indicators to the threat intelligence database.
+
+
+SCENARIO 2: 
+
+USER ACCOUNT TO BE USED: (USER 2) 
+
+Malware Detected on Employee Workstation
+Ticket Title: Malware Detected on Workstation
+
+
+BODY: Hi, this is <NAME OF CUSTOMER> The EDR system flagged unusual activity on a workstation, 
+including unauthorized processes and outbound connections to a known malicious IP address. T
+he workstation belongs to me in the Sales Department.
+
+
+SOLUTION/MITIGATION: 
+
+Initial Assessment:
+
+The EDR alert indicated the presence of a trojan malware on the workstation.
+
+The malware attempted to establish outbound connections to a command-and-control (C2) server.
+
+
+Immediate Actions Taken:
+
+Isolated the infected workstation from the network to prevent lateral movement.
+
+Notified <NAME OF CUSTOMER> to stop using the workstation immediately.
+
+Collected logs and artifacts for further analysis.
+
+
+Mitigation Steps:
+
+
+Containment:
+
+Disconnected the workstation from the network.
+
+Disabled your network account temporarily.
+
+
+Eradication:
+
+Ran a full antivirus scan on the workstation and removed the detected malware.
+
+Reimaged the workstation to ensure complete removal of the malware.
+
+
+Recovery:
+
+Restored your account and workstation access after ensuring the system was clean.
+
+Verified that no sensitive data was exfiltrated during the incident.
+
+
+Prevention:
+
+Updated the antivirus signatures and endpoint protection rules.
+
+Conducted a review of your browsing and download history to identify the source of the infection.
+
+Recommended employee training on safe browsing practices and avoiding suspicious downloads.
+
+
+Follow-Up Actions:
+
+Monitored the network for any signs of further malware activity.
+
+Conducted a vulnerability scan on the workstation to ensure no unpatched software was exploited.
+
+Documented the incident and added the malware indicators to the threat intelligence database.
+
+
+
+------------------------------------------------------------
+
+TIER 2 HANDLING: 
+
+SCENARIO 1: 
+
+ACCOUNT TO BE USED: (USER 2)
+
+Compromised Internal Server via Exploited Vulnerability
+Ticket Title: Unauthorized Access to Internal Web Server
+
+BODY: The SIEM system detected anomalous outbound traffic from an internal web server (web-srv-05), i
+ncluding repeated connections to a suspicious external IP address. 
+Preliminary analysis by Tier 1 revealed the server was 
+hosting unexpected cryptocurrency-mining software and had 
+unauthorized SSH login attempts from an unknown IP.
+
+
+SOLUTION/MITIGATION 
+
+Forensic Analysis:
+
+Reviewed server logs and identified a successful exploit of CVE-2023-12345 (a known vulnerability in the server’s Apache Struts version).
+
+Discovered a backdoor shell script (/tmp/.malicious_script) allowing persistent remote access.
+
+Identified lateral movement attempts to other servers in the same subnet.
+
+
+Impact Assessment:
+
+The server was part of a critical customer-facing application, risking data exfiltration and service disruption.
+
+Cryptocurrency-mining malware degraded server performance.
+
+Potential exposure of internal network credentials stored in temporary files.
+
+Mitigation Steps
+
+Containment:
+
+Isolated the compromised server from the network to prevent lateral movement.
+
+Blocked the malicious external IP at the firewall.
+
+Disabled non-essential services on the server.
+
+Eradication:
+
+Patched the Apache Struts vulnerability (CVE-2023-12345).
+
+Removed the backdoor script and terminated malicious processes.
+
+Replaced SSH keys and rotated all credentials associated with the server.
+
+Recovery:
+
+Restored the server from a clean backup after ensuring no residual malware.
+
+Validated application functionality post-recovery.
+
+Prevention:
+
+Enforced automated vulnerability scanning and patch management for all servers.
+
+Implemented a Web Application Firewall (WAF) to block exploit attempts.
+
+Restricted inbound/outbound traffic to the server using strict firewall rules.
+
+Follow-Up Actions:
+
+Conducted a full network sweep to identify other vulnerable servers.
+
+Monitored the server for 72 hours post-recovery for anomalies.
+
+Updated incident response playbooks to include Apache Struts vulnerability checks.
+
+
+SCENARIO 2: 
+ACCOUNT TO BE USED: USER 3 
+
+Advanced Persistent Threat (APT) Lateral Movement
+Ticket Title: Suspected APT Activity in Finance Department
+
+BODY: An EDR alert flagged suspicious activity on a finance department workstation, including use of Mimikatz 
+(a credential-dumping tool) and connections to internal 
+servers hosting sensitive financial data. 
+Tier 1 isolated the workstation but found evidence of 
+attacker lateral movement to three additional systems.
+
+
+SOLUTION/MITIGATION: 
+
+Forensic Analysis:
+
+Identified a phishing email (disguised as an invoice) sent to a finance employee as the initial attack vector.
+
+Discovered the attacker used stolen credentials to pivot to the Domain Controller and extract Active Directory data.
+
+Found evidence of data exfiltration to a foreign IP using encrypted HTTPS tunnels.
+
+Impact Assessment:
+
+Sensitive financial records (payroll, tax data) were accessed and exfiltrated.
+
+Domain administrative privileges were temporarily compromised.
+
+Risk of ransomware deployment or further data theft.
+
+Mitigation Steps
+
+Containment:
+
+Isolated all compromised workstations and servers.
+
+Reset passwords for all domain admin accounts and enforced MFA.
+
+Blocked exfiltration IPs and domains at the firewall.
+
+Eradication:
+
+Removed malicious tools (e.g., Mimikatz) and persistence mechanisms.
+
+Rebuilt compromised systems from clean images.
+
+Revoked Kerberos tickets and invalidated all active sessions.
+
+Recovery:
+
+Restored financial data from offline backups.
+
+Conducted a full AD audit to identify unauthorized changes.
+
+Prevention:
+
+Deployed endpoint detection rules to flag credential-dumping tools.
+
+Enforced network segmentation to restrict access to financial systems.
+
+Implemented email sandboxing to analyze attachments for malware.
+
+Follow-Up Actions:
+
+Engaged a third-party threat intelligence firm to track the APT group.
+
+Conducted a red team exercise to test defenses against similar attacks.
+
+Updated incident response playbooks for APT scenarios.
+
+
+--------------------------------------------------------------------
+
+TIER 3 HANDLING 
+
+SCENARIO 1: 
+
+ACCOUNTS TO BE USED: (USER 3) 
+Enterprise-Wide Ransomware Attack
+Ticket Title: Ransomware Encryption of Critical Systems
+
+BODY: A coordinated ransomware attack encrypted files across 200+ systems, including critical databases, finance servers, and backup repositories. Attackers deployed LockBit 4.0 ransomware via a compromised third-party vendor account, bypassing MFA through session hijacking. A ransom note demanded 
+$5M in cryptocurrency for decryption keys.
+
+
+
+
+SOLUTION/MITIGATION 
+
+Forensic Investigation:
+
+Attackers exploited a zero-day vulnerability in the company’s VPN gateway (CVE-2023-98765) to gain initial access.
+
+Lateral movement used PsExec and WMI to propagate ransomware.
+
+Identified double extortion: Data was exfiltrated to a dark web leak site before encryption.
+
+
+Impact Assessment:
+
+Critical systems offline: Production, payroll, and customer databases encrypted.
+
+Financial loss: Estimated $2M/hour downtime cost.
+
+Reputational risk: Customer data leaked on dark web forums.
+
+Mitigation Steps
+
+Containment:
+
+Shut down VPN access and isolated the entire network into segments to halt ransomware spread.
+
+Disabled all non-essential services and protocols (e.g., SMB, RDP).
+
+Engaged law enforcement (FBI Cyber Division) and ransomware negotiation experts.
+
+
+Eradication:
+
+Removed ransomware binaries and persistence mechanisms (e.g., scheduled tasks, registry entries).
+
+Patched the VPN gateway vulnerability and revoked all active sessions.
+
+Terminated attacker access by resetting all service accounts and domain admin credentials.
+
+
+Recovery:
+
+Restored systems from immutable, offline backups (unaffected by ransomware).
+
+Deployed decryption tools provided by law enforcement (where applicable).
+
+
+Prevention:
+
+Implemented Zero Trust Architecture with micro-segmentation.
+
+Migrated backups to air-gapped, write-once-read-many (WORM) storage.
+
+Enforced phishing-resistant MFA (FIDO2 keys) for all third-party vendors.
+
+Follow-Up:
+
+Conducted a 30-day network-wide hunt for dormant ransomware payloads.
+
+Published a post-incident report to stakeholders and regulators.
+
+Partnered with a threat intelligence firm to monitor dark web data leaks.
+
+
+SCENARIO 2: 
+ACCOUNTS TO BE USED: (USER 1) 
+
+Nation-State APT Targeting Intellectual Property
+Ticket Title: APT29 (Cozy Bear) Data Exfiltration Campaign
+
+BODY: A threat intelligence firm alerted the organization to APT29 activity targeting R&D servers hosting proprietary technology blueprints. Attackers used polymorphic malware and living-off-the-land binaries (e.g., PowerShell, CertUtil) to evade detection. Data was exfiltrated via DNS tunneling over 6 months.
+
+Forensic Investigation:
+
+Initial access via a spear-phishing email with a malicious Excel macro (CVE-2023-54321).
+
+Attackers deployed Cobalt Strike beacons for command-and-control (C2).
+
+Exfiltrated 500GB of intellectual property (IP) to rogue DNS servers.
+
+Impact Assessment:
+
+Loss of competitive advantage due to stolen IP.
+
+Risk of regulatory fines for failure to protect sensitive data.
+
+Long-term reputational damage with clients and investors.
+
+Mitigation Steps
+Containment:
+
+Blocked all C2 IPs and domains at the firewall and DNS layer.
+
+Isolated R&D servers and revoked all user access.
+
+Disabled macros and PowerShell across the enterprise.
+
+Eradication:
+
+Removed Cobalt Strike beacons and malicious scheduled tasks.
+
+Rebuilt compromised servers with hardened configurations.
+
+Rotated TLS certificates and Kerberos KRBTGT keys twice.
+
+Recovery:
+
+Restored pre-attack data snapshots for R&D servers.
+
+Conducted a 90-day audit of all data access logs to identify exfiltrated files.
+
+Prevention:
+
+Deployed network traffic analysis (NTA) tools to detect DNS tunneling.
+
+Implemented application allowlisting to block unauthorized binaries.
+
+Enrolled in a managed threat detection and response (MDR) service.
+
+Follow-Up:
+
+Shared Indicators of Compromise (IoCs) with ISACs (Information Sharing and Analysis Centers).
+
+Collaborated with federal agencies (CISA, DHS) for attribution and counterintelligence.
+
+Launched a red team exercise to test defenses against APT tactics.
+
